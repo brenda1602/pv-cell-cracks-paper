@@ -122,16 +122,21 @@ solares reais. Cada imagem no dataset contém uma célula individual de silício
 policristalino ou monocristalino. Todas as imagens foram rotuladas por um
 especialista,
 indicando a probabilidade da célula estar danificada.
-
 Durante a etapa de pré-processamento, os valores de
 probabilidade são convertidos em uma classe binária, classificando as imagens
 como "Defeituosa" ou "Não Defeituosa". Nesse processo imagens rotuladas com
 probabilidade acima de 60\% são categorizadas como "Defeituosa", enquanto
 aquelas com uma probabilidade igual ou inferior a este limiar são rotuladas
-como "Não Defeituosa". Em seguida, as imagens foram redimensionadas para
-224x224 pixels. Na Fig.\ref{fig:amostras-dataset} são apresentadas quatro
-amostras do
-dataset reclassificado.
+como "Não Defeituosa".
+
+As imagens foram redimensionadas para
+224x224 pixels. Em seguida, foi aplicado um filtro de equalização de histograma
+usando a função \textit{createCLAHE} da biblioteca OpenCV [REFER], a qual
+ajusta o contraste da imagem de maneira adaptativa, limitando o aumento de
+contraste para evitar a ampliação do ruído.
+
+Na Fig.\ref{fig:amostras-dataset} são apresentadas quatro amostras do dataset
+reclassificado.
 
 \begin{figure}[htbp]
     \centering
@@ -199,13 +204,11 @@ experimentos e ajustes realizados durante o processo de desenvolvimento.
 
 Na última etapa, foram realizadas predições com o modelo treinado utilizando
 um conjunto de 15 imagens. Além disso, avaliou-se a eficácia do modelo proposto
-por meio de métricas de avaliação, como acurácia, precisão, recall e F1-score.
+por meio de métricas de avaliação, como acurácia, perda e .
 
 \section{Resultados}
 
-A acurácia final do modelo proposto foi de XX\%, com uma precisão de XX\%,
-recall de
-XX\%. A Fig \ref{fig:training-accuracy} apresenta a curva de acurácia do modelo
+A acurácia do modelo proposto com o conjunto de teste foi de 72.76\%, e perda de 60.45\%. A Fig \ref{fig:training-accuracy} apresenta a curva de acurácia do modelo
 durante
 o treinamento, enquanto a Fig \ref{fig:training-loss} mostra a curva de função
 de perda.
@@ -215,25 +218,30 @@ enfatizando que o modelo identificou corretamente XX\% das células defeituosas.
 \begin{figure}[htbp]
 
     \centerline{\includegraphics[width=0.4\textwidth]{images/training-accuracy.png}}
-    \caption{Distribuição do dataset de referência quanto ao tipo de célula
-        fotovoltaica e o estado.}
+    \caption{Acurácia do treinamento ao longo das épocas.}
     \label{fig:training-accuracy}
 \end{figure}
+
 \begin{figure}[htbp]
 
-    \centerline{\includegraphics[width=0.4\textwidth]{images/training-accuracy.png}}
-    \caption{Distribuição do dataset de referência quanto ao tipo de célula
-        fotovoltaica e o estado.}
+    \centerline{\includegraphics[width=0.4\textwidth]{images/training-loss.png}}
+    \caption{Perda do treinamento ao longo das épocas.}
     \label{fig:training-loss}
 \end{figure}
+
 \begin{figure}[htbp]
 
-    \centerline{\includegraphics[width=0.4\textwidth]{images/training-accuracy.png}}
-    \caption{Distribuição do dataset de referência quanto ao tipo de célula
-        fotovoltaica e o estado.}
-    \label{fig:confusion-matrix}
+    \centerline{\includegraphics[width=0.4\textwidth]{images/validation-accuracy.png}}
+    \caption{Acurácia da validação ao longo das épocas.}
+    \label{fig:validation-accuracy}
 \end{figure}
 
+\begin{figure}[htbp]
+
+    \centerline{\includegraphics[width=0.4\textwidth]{images/validation-accuracy.png}}
+    \caption{Matriz de confusão para o conjunto de teste.}
+    \label{fig:confusion-matrix}
+\end{figure}
 \section{Conclusão}
 
 Com base nos resultados apresentados, conclui-se que a rede neural proposta
