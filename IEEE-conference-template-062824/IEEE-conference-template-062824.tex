@@ -82,7 +82,7 @@ enquanto o segundo atingiu 88.42\%. Em trabalhos mais recentes
 (\cite{Pratt2023},\cite{Pratt2021}), são
 utilizados modelos de segmentação de imagem baseados em aprendizagem profundo
 de máquina para classificar defeitos e características encontradas das células
-fotovoltaicas.\cite{Pratt2023} avaliou a eficácia de x modelos treinados para
+fotovoltaicas.\cite{Pratt2023} avaliou a eficácia de 4 modelos treinados para
 classificar
 24 tipos de defeitos e características em células fotovoltaicas.
 Dentre os modelos analisados, o DeepLabv3+ obtive o melhor
@@ -143,7 +143,7 @@ ajusta o contraste da imagem de maneira adaptativa, limitando o aumento de
 contraste para evitar a ampliação do ruído.
 
 Na Fig.\ref{fig:amostras-dataset} são apresentadas quatro amostras do dataset
-reclassificado.
+após a etapa de pré processamento.
 
 \begin{figure}[htbp]
     \centering
@@ -159,7 +159,9 @@ reclassificado.
         \textbf{2 (c)}                                                    &
         \textbf{2 (d)}                                                      \\
     \end{tabular}
-    \caption{Amostras do dataset de células fotovoltaicas: 2(a) monocristalina
+    \caption{Amostras do dataset de células fotovoltaicas após
+        pré-processamento: 2(a)
+        monocristalina
         sem defeito, 2(b) monocristalina com defeito, 2(c) policristalina sem
         defeito,
         2(d) policristalina com defeito. \cite{Deitsch2021}}
@@ -186,7 +188,7 @@ referência.
 
 O dataset processado foi dividido de forma randômica em dois conjuntos, um de
 treinamento
-com 75\% (2845 imagens) e outro de teste com 24\% (934 imagens). Os
+com 75\% (2418 imagens) e outro de teste com 24\% (791 imagens). Os
 hiperparâmetros do modelo foram definidos empiricamente, com base em
 experimentos e ajustes realizados durante o processo de desenvolvimento.
 \ref{tab:hiperparametros}.
