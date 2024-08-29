@@ -50,7 +50,7 @@ A energia fotovoltaica representa 19\% da matriz elétrica brasileira, de
 acordo com a Associação Brasileira de Energia Solar Fotovoltaica (Absolar)
 \cite{absolar2024}. A eficiência de sistemas de energia solar é comumente
 afetada pela presença de defeitos nas células fotovoltaicas, como fissuras,
-áreas inativas, e \textit{gridlines}. Sendo assim, a inspeção dos módulos
+áreas inativas, e delaminação. Sendo assim, a inspeção dos módulos
 é imprescindível para obter-se um maior aproveitamento dos ativos.
 
 O ensaio de eletroluminescência em módulos fotovoltaicos tem sido amplamente
@@ -92,7 +92,7 @@ Este trabalho apresenta um modelo para determinar a
 possibilidade da célula estar danificada utilizando uma arquitetura de rede
 neural convolucional (CNN). CNNs são amplamente utilizadas em tarefas de
 classificação e visão computacional, devido a sua capacidade de extrair padrões
-em imagens [REF IBM]. Esta arquitetura possui três tipos de camadas:
+em imagens. Esta arquitetura possui três tipos de camadas:
 convolucional, \textit{pooling} e totalmente conectada. A camada convolucional
 é o alicerce principal de uma CNN, onde a imagem é processada por filtros
 (\textit{kernels}) que
@@ -226,10 +226,10 @@ acurácia da validação ao longo das épocas, mostrando uma curva com grandes
 oscilações em uma faixa de 0.55 a 0.82. A acurácia do modelo proposto com o
 conjunto de teste foi de 82.75\%, e perda de 54.10\%.
 
-O valor de recall no processo de validação foi de 82,44\%, o modelo foi capaz
+O valor de recall no processo de validação foi de 68\%, o modelo foi capaz
 de identificar corretamente a maioria das instâncias positivas. A Fig
 \ref{fig:confusion-matrix} apresenta a matriz de confusão do modelo,
-enfatizando que o modelo identificou no conjunto de teste corretamente 93.5\%
+enfatizando que o modelo identificou no conjunto de teste corretamente 94.0\%
 das células não defeituosas e apenas 68\% das células defeituosas.
 
 \begin{figure}[htbp]
@@ -265,7 +265,7 @@ A rede neural convolucional proposta neste trabalho alcançou uma acurácia de
 82.75\% na classificação de células fotovoltaicas defeituosas. No entanto,
 com base nos resultados apresentados, conclui-se que o modelo não obteve um
 desempenho satisfatório na classificação de células fotovoltaicas
-defeituosas, devido a baixa taxa de recall (68\%).
+defeituosas, devido a baixa taxa de recall 68.00\%.
 
 Durante a etapa de predição observou-se que o modelo apresentou dificuldade
 principalmente em classificar principalmente células de silício policristalino.
