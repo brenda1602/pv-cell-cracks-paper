@@ -27,16 +27,22 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \maketitle
 
 \begin{abstract}
-    This document is a model and instructions for \LaTeX.
-    This and the IEEEtran.cls file define the components of your paper [title,
-            text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special
-    Characters,
-    Footnotes,
-    or Math in Paper Title or Abstract.
+    A energia fotovoltaica representa uma parte significativa da matriz
+    elétrica brasileira. A inspeção de módulos fotovoltaicos é uma prática
+    crucial para maximizar a eficiência dos sistemas solares. O ensaio de
+    eletroluminescência é
+    uma técnica não-destrutiva amplamente utilizada para detectar defeitos em
+    células fotovoltaicas, mas a revisão manual de centenas de imagens
+    compromete a eficiência. Este trabalho propõe um modelo baseado em rede
+    neural convolucional (CNN) para classificar células como defeituosas ou
+    não. O modelo foi treinado com um conjunto de dados de imagens de
+    eletroluminescência, pré-processadas e rotuladas. O modelo alcançou uma
+    acurácia de 82.75\%, mas apresentou uma baixa taxa de recall (68\%),
 \end{abstract}
 
 \begin{IEEEkeywords}
-    component, formatting, style, styling, insert.
+    Rede Neural Convolucional, Ensaio de Eletroluminescência, Células
+    Fotovoltaicas, Detecção de Defeitos.
 \end{IEEEkeywords}
 
 \section{Introduction}
@@ -131,7 +137,8 @@ como "Não Defeituosa".
 
 As imagens foram redimensionadas para
 224x224 pixels. Em seguida, foi aplicado um filtro de equalização de histograma
-usando a função \textit{createCLAHE} da biblioteca OpenCV [REFER], a qual
+usando a função \textit{createCLAHE} da biblioteca OpenCV, a
+qual
 ajusta o contraste da imagem de maneira adaptativa, limitando o aumento de
 contraste para evitar a ampliação do ruído.
 
@@ -179,7 +186,7 @@ referência.
 
 O dataset processado foi dividido de forma randômica em dois conjuntos, um de
 treinamento
-com 75\% (2382 imagens) e outro de teste com 24\% (779 imagens). Os
+com 75\% (2845 imagens) e outro de teste com 24\% (934 imagens). Os
 hiperparâmetros do modelo foram definidos empiricamente, com base em
 experimentos e ajustes realizados durante o processo de desenvolvimento.
 \ref{tab:hiperparametros}.
@@ -192,7 +199,7 @@ experimentos e ajustes realizados durante o processo de desenvolvimento.
         \textbf{Parâmetro}   & \textbf{Valor}       \\ \hline
         Tamanho do kernel    & 3x3                  \\ \hline
         Taxa de aprendizagem & 0.001                \\ \hline
-        Number of Epochs     & 100                  \\ \hline
+        Number of Epochs     & 200                  \\ \hline
         Tamanho do lote      & 14                   \\ \hline
         Função de perda      & binary\_crossentropy \\ \hline
         Otimizador           & Adam                 \\ \hline
@@ -204,16 +211,26 @@ experimentos e ajustes realizados durante o processo de desenvolvimento.
 
 Na última etapa, foram realizadas predições com o modelo treinado utilizando
 um conjunto de 15 imagens. Além disso, avaliou-se a eficácia do modelo proposto
-por meio de métricas de avaliação, como acurácia, perda e .
+por meio de métricas de avaliação, como acurácia, perda e recall.
 
 \section{Resultados}
 
-A acurácia do modelo proposto com o conjunto de teste foi de 72.76\%, e perda de 60.45\%. A Fig \ref{fig:training-accuracy} apresenta a curva de acurácia do modelo
-durante
-o treinamento, enquanto a Fig \ref{fig:training-loss} mostra a curva de função
-de perda.
-A Fig \ref{fig:confusion-matrix} apresenta a matriz de confusão do modelo,
-enfatizando que o modelo identificou corretamente XX\% das células defeituosas.
+Apesar do número de épocas, definido em 200, o treinamento foi interrompido
+após 150 épocas, pois o modelo atingiu a convergência. A Fig
+\ref{fig:training-accuracy} apresenta a curva de acurácia
+do modelo durante o treinamento, enquanto a Fig \ref{fig:training-loss}
+mostra a curva da função de perda. Percebe-se que após a 100ª época, a acurácia
+de treinamento não apresentou melhorias significativas, enquanto a perda
+permaneceu faixa de 0.47. A Fig \ref{fig:validation-accuracy} apresenta a
+acurácia da validação ao longo das épocas, mostrando uma curva com grandes
+oscilações em uma faixa de 0.55 a 0.82. A acurácia do modelo proposto com o
+conjunto de teste foi de 82.75\%, e perda de 54.10\%.
+
+O valor de recall no processo de validação foi de 82,44\%, o modelo foi capaz
+de identificar corretamente a maioria das instâncias positivas. A Fig
+\ref{fig:confusion-matrix} apresenta a matriz de confusão do modelo,
+enfatizando que o modelo identificou no conjunto de teste corretamente 93.5\%
+das células não defeituosas e apenas 68\% das células defeituosas.
 
 \begin{figure}[htbp]
 
@@ -238,20 +255,21 @@ enfatizando que o modelo identificou corretamente XX\% das células defeituosas.
 
 \begin{figure}[htbp]
 
-    \centerline{\includegraphics[width=0.4\textwidth]{images/validation-accuracy.png}}
+    \centerline{\includegraphics[width=0.4\textwidth]{images/matriz-confusao.png}}
     \caption{Matriz de confusão para o conjunto de teste.}
     \label{fig:confusion-matrix}
 \end{figure}
 \section{Conclusão}
 
-Com base nos resultados apresentados, conclui-se que a rede neural proposta
-neste
-trabalho não obteve um desempenho satisfatório na classificação de células
-fotovoltaicas defeituosas. O modelo se mostrou ineficaz na identificação de
-defeitos nas imagens de eletroluminescência, com uma acurácia de XX\%. Durante
-a etapa de predição observou-se que o modelo apresentou dificuldade
-principalmente em classificar principalmente células de silício policristalino
-DADO. Acredita-se que a textura natural observada nas imagens de
+A rede neural convolucional proposta neste trabalho alcançou uma acurácia de
+82.75\% na classificação de células fotovoltaicas defeituosas. No entanto,
+com base nos resultados apresentados, conclui-se que o modelo não obteve um
+desempenho satisfatório na classificação de células fotovoltaicas
+defeituosas, devido a baixa taxa de recall (68\%).
+
+Durante a etapa de predição observou-se que o modelo apresentou dificuldade
+principalmente em classificar principalmente células de silício policristalino.
+Acredita-se que a textura natural observada nas imagens de
 eletroluminescência de células policristalinas tenha dificultado a
 identificação de defeitos pelo modelo.
 
